@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" fill="none">
+  <rect width="1200" height="630" fill="#493C35"/>
+  <rect x="30" y="30" width="1140" height="570" stroke="#727A5B" stroke-width="2" stroke-opacity="0.3"/>
+  
+  <!-- Subtle background glow -->
+  <circle cx="600" cy="315" r="400" fill="#727A5B" fill-opacity="0.08"/>
+
+  <!-- Brand text -->
+  <text x="600" y="240" font-family="'Playfair Display', Georgia, serif" font-size="88" font-weight="600" fill="#F4EDE2" text-anchor="middle" letter-spacing="4">NORA</text>
+  <text x="600" y="295" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="600" fill="#727A5B" text-anchor="middle" letter-spacing="8">GESTÃO • ATENDIMENTO • SUPORTE</text>
+  
+  <text x="600" y="380" font-family="'Playfair Display', Georgia, serif" font-size="34" fill="#F4EDE2" text-anchor="middle" font-style="italic">Nem toda a operação do seu negócio precisa depender de você.</text>
+  
+  <text x="600" y="440" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="19" fill="#CFC0AA" text-anchor="middle" letter-spacing="1">Suporte administrativo boutique para autônomos, clínicas e pequenos negócios.</text>
+
+  <rect x="500" y="490" width="200" height="48" rx="6" fill="#727A5B"/>
+  <text x="600" y="520" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="16" font-weight="600" fill="#F4EDE2" text-anchor="middle">norasuporte.com.br</text>
+</svg>

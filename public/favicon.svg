@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="14" fill="#F4EDE2"/>
+  <rect x="2" y="2" width="60" height="60" rx="12" stroke="#CFC0AA" stroke-width="1.5"/>
+  <!-- Elegant N Monogram with serif touch -->
+  <path d="M19 18H24V46H19V18Z" fill="#493C35"/>
+  <path d="M40 18H45V46H40V18Z" fill="#493C35"/>
+  <path d="M23 18L41 46H45L27 18H23Z" fill="#727A5B"/>
+  <circle cx="42.5" cy="20.5" r="2.5" fill="#493C35"/>
+</svg>

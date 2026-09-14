@@ -1,0 +1,72 @@
+:root {
+  /* Brand Proportional Palette */
+  /* ~60% Creme */
+  --color-creme: #F4EDE2;
+  --color-creme-warm: #ECE3D4;
+  --color-creme-surface: #FAF7F2;
+  --color-creme-elevated: #FFFDFC;
+
+  /* ~20% Café Profundo */
+  --color-cafe: #493C35;
+  --color-cafe-dark: #352B26;
+  --color-cafe-light: #5C4D44;
+  --color-cafe-subtle: rgba(73, 60, 53, 0.06);
+
+  /* ~10% Verde Oliva */
+  --color-oliva: #727A5B;
+  --color-oliva-dark: #5A6245;
+  --color-oliva-light: #87916C;
+  --color-oliva-subtle: rgba(114, 122, 91, 0.12);
+  --color-oliva-tag-bg: rgba(114, 122, 91, 0.08);
+
+  /* ~10% Bege Areia */
+  --color-bege: #CFC0AA;
+  --color-bege-light: #DFD4C4;
+  --color-bege-border: rgba(207, 192, 170, 0.55);
+  --color-bege-border-hover: rgba(114, 122, 91, 0.4);
+
+  /* Preto Suave & Neutros para Tipografia */
+  --color-preto: #252525;
+  --color-text-body: #3B332E;
+  --color-text-muted: #6E635C;
+  --color-text-light: #9B8F86;
+  --color-border-subtle: rgba(73, 60, 53, 0.12);
+  --color-border-hover: rgba(73, 60, 53, 0.28);
+
+  /* Tipografia Editorial */
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+  /* Spacing Scale */
+  --space-2xs: 0.25rem;  /* 4px */
+  --space-xs: 0.5rem;    /* 8px */
+  --space-sm: 0.75rem;   /* 12px */
+  --space-md: 1rem;      /* 16px */
+  --space-lg: 1.5rem;    /* 24px */
+  --space-xl: 2rem;      /* 32px */
+  --space-2xl: 3rem;     /* 48px */
+  --space-3xl: 4.5rem;   /* 72px */
+  --space-4xl: 6.5rem;   /* 104px */
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-full: 9999px;
+
+  /* Shadows (Minimal, Elegant, No blurry glassmorphism) */
+  --shadow-subtle: 0 1px 3px rgba(73, 60, 53, 0.04), 0 4px 12px rgba(73, 60, 53, 0.03);
+  --shadow-card: 0 2px 8px rgba(73, 60, 53, 0.04), 0 12px 28px rgba(73, 60, 53, 0.05);
+  --shadow-card-hover: 0 4px 14px rgba(73, 60, 53, 0.07), 0 20px 36px rgba(73, 60, 53, 0.08);
+
+  /* Max Widths */
+  --max-width: 1240px;
+  --max-width-narrow: 860px;
+  --max-width-hero: 1080px;
+
+  /* Transitions */
+  --transition-fast: 160ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-smooth: 320ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+}
