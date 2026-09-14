@@ -38,7 +38,7 @@
   <!-- Google Fonts Preconnect & Subsets -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
 
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" href="./src/styles/variables.css" />
@@ -221,57 +221,95 @@
 
   <main id="main-content">
 
-    <!-- HERO SECTION -->
+    <!-- HERO SECTION (Monumental Masthead & 3D Stage) -->
     <section class="section section-hero" id="inicio" aria-labelledby="hero-title">
-      <div class="container hero-wrapper">
-        <div class="hero-content">
-          <div class="hero-tagline">
-            <span>GESTÃO</span> • <span>ATENDIMENTO</span> • <span>SUPORTE</span>
+      <div class="container">
+        
+        <!-- Monumental Typographic Masthead -->
+        <div class="hero-brand-monumental-container">
+          <div class="hero-tagline-editorial">
+            <span class="tagline-rule"></span>
+            <span class="tagline-text">GESTÃO • ATENDIMENTO • SUPORTE</span>
+            <span class="tagline-rule"></span>
           </div>
 
-          <h1 id="hero-title" class="hero-headline">
-            Nem toda a operação do seu negócio precisa depender de você.
-          </h1>
-
-          <p class="hero-description">
-            A NORA assume atendimento, organização de agenda e processos administrativos recorrentes. Você recupera tempo estratégico enquanto sua rotina funciona com pontualidade e rigor boutique.
-          </p>
-
-          <div class="hero-actions">
-            <a href="#quote-modal" class="btn btn-primary" data-open-modal="quote" data-context="Hero">
-              Solicitar orçamento
-            </a>
-            <a href="https://wa.me/5511999990000?text=Ol%C3%A1%2C%20NORA!%20Gostaria%20de%20conversar%20sobre%20o%20suporte%20administrativo%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-              Falar com a NORA
-            </a>
+          <div class="hero-giant-nora" id="hero-title" aria-label="NORA">
+            <span>N</span>
+            <span>O</span>
+            <span>R</span>
+            <span>A</span>
           </div>
 
-          <div class="hero-trust">
-            <div class="hero-trust-item">
-              <span class="hero-trust-dot"></span>
-              <span>Atendimento personalizado sob medida</span>
+          <div class="hero-submasthead">
+            <span class="hero-submasthead-left">Núcleo de Organização, Relacionamento e Apoio</span>
+            <span class="hero-submasthead-center">Assessoria Operacional Boutique</span>
+            <span class="hero-submasthead-right">Atendimento Remoto Nacional</span>
+          </div>
+        </div>
+
+        <!-- Editorial Grid: Manifesto + 3D Installation Stage -->
+        <div class="hero-editorial-grid">
+          <div class="hero-manifesto-content">
+            <div class="eyebrow hero-manifesto-eyebrow">
+              <span class="eyebrow-index">( 01 )</span>
+              <span>Proposta Operacional</span>
             </div>
-            <div class="hero-trust-item">
-              <span class="hero-trust-dot"></span>
-              <span>Sem planos engessados</span>
+
+            <h2 class="hero-manifesto-headline">
+              Nem toda a operação do seu negócio precisa depender de <em>você</em>.
+            </h2>
+
+            <p class="hero-manifesto-text">
+              A NORA assume atendimento, organização de agenda e processos administrativos recorrentes. Você recupera tempo estratégico enquanto sua rotina opera com discrição, pontualidade e padrão boutique.
+            </p>
+
+            <div class="hero-manifesto-actions">
+              <a href="#quote-modal" class="btn btn-primary" data-open-modal="quote" data-context="Hero">
+                Solicitar orçamento
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+              </a>
+              <a href="https://wa.me/5511999990000?text=Ol%C3%A1%2C%20NORA!%20Gostaria%20de%20conversar%20sobre%20o%20suporte%20administrativo%20para%20minha%20empresa." target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                Falar com a NORA
+              </a>
             </div>
-            <div class="hero-trust-item">
-              <span class="hero-trust-dot"></span>
-              <span>Acompanhamento humano de excelência</span>
+
+            <div class="hero-manifesto-points">
+              <div class="manifesto-point-item">
+                <span class="manifesto-point-dot"></span>
+                <span>Atendimento sob medida, calibrado para a sua rotina real</span>
+              </div>
+              <div class="manifesto-point-item">
+                <span class="manifesto-point-dot"></span>
+                <span>Comece delegando apenas uma rotina e expanda quando quiser</span>
+              </div>
+              <div class="manifesto-point-item">
+                <span class="manifesto-point-dot"></span>
+                <span>Sem pacotes engessados e sem tabelas públicas</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3D Kinetic Art Installation Stage -->
+          <div class="hero-3d-stage">
+            <div class="stage-top-bar">
+              <span class="stage-title">Instalação Cinética 3D</span>
+              <span class="canvas-status-pill">
+                <span class="status-indicator-dot"></span>
+                <span id="canvas-status-text">Rotinas dispersas</span>
+              </span>
+            </div>
+
+            <div class="hero-canvas-container" id="canvas-container" title="Clique ou arraste para interagir com os elementos">
+              <!-- Three.js Canvas injetado aqui -->
+            </div>
+
+            <div class="stage-bottom-bar">
+              <span class="stage-hint">Arraste para girar • Role para alinhar</span>
+              <button type="button" class="stage-interactive-btn" id="canvas-toggle-btn">Organizar rotina</button>
             </div>
           </div>
         </div>
 
-        <!-- 3D Experience (Three.js): Complexidade em Organização -->
-        <div class="hero-canvas-container" id="canvas-container" title="Clique ou role para ver as tarefas se organizarem">
-          <div class="canvas-overlay-caption">
-            <span class="canvas-status-pill">
-              <span class="canvas-status-dot"></span>
-              <span id="canvas-status-text">Rotinas dispersas</span>
-            </span>
-            <span>Interação 3D • Role para organizar</span>
-          </div>
-        </div>
       </div>
     </section>
 

@@ -18,52 +18,60 @@ body {
   font-family: var(--font-sans);
   background-color: var(--color-creme);
   color: var(--color-text-body);
-  line-height: 1.65;
+  line-height: 1.68;
   font-weight: 400;
   overflow-x: hidden;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.012em;
 }
 
-/* Serif Headings (Editorial, Sophisticated, Atemporal) */
+/* Serif Headings (Editorial de Luxo & Alta Costura) */
 h1, h2, h3, h4, .font-serif {
   font-family: var(--font-serif);
   color: var(--color-cafe);
   font-weight: 400;
-  line-height: 1.15;
-  letter-spacing: -0.02em;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-italic {
+  font-style: italic;
 }
 
 h1 {
-  font-size: clamp(2.4rem, 5vw, 4.2rem);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
 }
 
 h2 {
-  font-size: clamp(1.85rem, 3.8vw, 3rem);
-  line-height: 1.18;
+  font-size: clamp(2.2rem, 4.2vw, 3.4rem);
+  line-height: 1.15;
   letter-spacing: -0.025em;
 }
 
 h3 {
-  font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+  font-size: clamp(1.4rem, 2.4vw, 1.85rem);
   line-height: 1.25;
 }
 
 h4 {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   line-height: 1.35;
 }
 
 p {
   font-size: 1.05rem;
   color: var(--color-text-body);
-  line-height: 1.7;
+  line-height: 1.72;
 }
 
 .text-lead {
-  font-size: clamp(1.15rem, 1.8vw, 1.35rem);
-  line-height: 1.6;
+  font-size: clamp(1.15rem, 1.75vw, 1.35rem);
+  line-height: 1.65;
   color: var(--color-cafe-light);
   font-weight: 350;
 }
@@ -73,19 +81,29 @@ p {
 }
 
 .text-caption {
-  font-size: 0.875rem;
+  font-size: 0.85rem;
   color: var(--color-text-muted);
   line-height: 1.5;
 }
 
 .eyebrow {
   font-family: var(--font-sans);
-  font-size: 0.78rem;
+  font-size: 0.74rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.22em;
   color: var(--color-oliva);
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.eyebrow-index {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--color-bege);
+  letter-spacing: 0.05em;
 }
 
 .eyebrow-cafe {
@@ -113,4 +131,32 @@ a {
 strong, b {
   font-weight: 600;
   color: var(--color-cafe);
+}
+
+/* Monumental Hero Typography */
+.hero-giant-nora {
+  font-family: var(--font-serif);
+  font-size: clamp(5.5rem, 19vw, 16.5rem);
+  font-weight: 350;
+  line-height: 0.88;
+  letter-spacing: 0.04em;
+  color: var(--color-cafe);
+  text-align: center;
+  user-select: none;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0.75rem 0 1.5rem;
+  padding: 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.hero-giant-nora span {
+  display: inline-block;
+  transition: transform var(--transition-smooth), color var(--transition-smooth);
+}
+
+.hero-giant-nora span:hover {
+  color: var(--color-oliva);
+  transform: translateY(-4px);
 }
