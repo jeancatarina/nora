@@ -68,6 +68,17 @@
     ]
   }
   </script>
+
+  <!-- Previne auto-scroll e restauração de posição indesejada no Safari e Chrome -->
+  <script>
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    if (window.location.hash) {
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+    }
+    window.scrollTo(0, 0);
+  </script>
 </head>
 <body>
   <!-- Archival Handmade Paper Grain Texture Overlay -->

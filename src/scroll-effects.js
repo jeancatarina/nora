@@ -107,7 +107,9 @@ export function initScrollEffects() {
     scrollIndicator.addEventListener('click', () => {
       const target = document.querySelector('#nosso-proposito');
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        const headerHeight = 76;
+        const targetTop = target.getBoundingClientRect().top + window.pageYOffset - headerHeight;
+        window.scrollTo({ top: targetTop, behavior: 'smooth' });
       }
     });
   }

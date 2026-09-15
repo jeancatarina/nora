@@ -1,7 +1,18 @@
 import { initCalculator } from './calculator.js';
 import { initScrollEffects } from './scroll-effects.js';
 
+// Previne restauração indesejada de rolagem e limpa hashes residuais
+if ('scrollRestoration' in history) {
+  history.scrollRestoration = 'manual';
+}
+if (window.location.hash) {
+  history.replaceState(null, '', window.location.pathname + window.location.search);
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
+  window.scrollTo(0, 0);
+
   // 1. Inicializa Efeitos de Scroll & Parallax da Referência
   initScrollEffects();
 
@@ -280,4 +291,35 @@ document.addEventListener('DOMContentLoaded', () => {
       headerEl?.classList.remove('is-scrolled');
     }
   }, { passive: true });
+
+  // 10. Navegação Suave em Âncoras sem Reter Hash Residual
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener('click', (e) => {
+      const href = anchor.getAttribute('href');
+      if (!href || href === '#' || href.startsWith('#quote-modal')) return;
+
+      const targetEl = document.querySelector(href);
+      if (targetEl) {
+        e.preventDefault();
+
+        // Fechar gaveta mobile se estiver aberta
+        if (mobileDrawer && mobileDrawer.classList.contains('is-open')) {
+          mobileDrawer.classList.remove('is-open');
+          menuToggle?.classList.remove('is-active');
+          menuToggle?.setAttribute('aria-expanded', 'false');
+        }
+
+        const headerHeight = 76;
+        const targetTop = targetEl.getBoundingClientRect().top + window.pageYOffset - (href === '#inicio' ? 0 : headerHeight);
+
+        window.scrollTo({
+          top: targetTop,
+          behavior: 'smooth'
+        });
+
+        // Limpa a hash da URL para que futuros acessos ou reloads sempre iniciem no topo (Hero NORA)
+        history.replaceState(null, '', window.location.pathname + window.location.search);
+      }
+    });
+  });
 });
