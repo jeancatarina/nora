@@ -1,19 +1,91 @@
-/* Discreet Micro-interactions & Keyframes */
+/* Discreet Luxury Micro-interactions & Tactile Overlays */
+
+/* Archival Paper Texture / Film Grain (Sensação de papel artesanal italiano) */
+.grain-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.042;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* Custom Luxury Cursor (Ativo em Desktop) */
+@media (hover: hover) and (pointer: fine) {
+  body {
+    cursor: default;
+  }
+
+  .cursor-dot {
+    width: 6px;
+    height: 6px;
+    background-color: var(--color-cafe);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 10000;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  }
+
+  .cursor-ring {
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-oliva);
+    border-radius: 50%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease-out, width 0.25s ease, height 0.25s ease, border-color 0.25s ease, background-color 0.25s ease;
+  }
+
+  body.cursor-hover .cursor-dot {
+    width: 10px;
+    height: 10px;
+    background-color: var(--color-oliva);
+  }
+
+  body.cursor-hover .cursor-ring {
+    width: 52px;
+    height: 52px;
+    border-color: var(--color-cafe);
+    background-color: rgba(114, 122, 91, 0.08);
+  }
+}
+
+/* Keyframes */
 @keyframes pulse {
   0%, 100% {
     opacity: 1;
     transform: scale(1);
   }
   50% {
-    opacity: 0.4;
+    opacity: 0.35;
     transform: scale(0.85);
+  }
+}
+
+@keyframes floatGentle {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-6px);
   }
 }
 
 @keyframes fadeIn {
   from {
     opacity: 0;
-    transform: translateY(12px);
+    transform: translateY(16px);
   }
   to {
     opacity: 1;
@@ -22,10 +94,54 @@
 }
 
 .fade-in {
-  animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: fadeIn 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
-/* Accessibility: Respect Reduced Motion */
+/* Floating Scope Bar (Dossiê Flutuante quando tags são selecionadas) */
+.floating-scope-dock {
+  position: fixed;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(120%);
+  z-index: 900;
+  background-color: var(--color-cafe);
+  color: var(--color-creme);
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  box-shadow: 0 16px 40px rgba(73, 60, 53, 0.35);
+  border: 1px solid rgba(244, 237, 226, 0.2);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+  max-width: 90vw;
+}
+
+.floating-scope-dock.is-visible {
+  transform: translateX(-50%) translateY(0);
+  opacity: 1;
+}
+
+.floating-scope-info {
+  font-size: 0.85rem;
+  color: var(--color-creme);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.floating-scope-badge {
+  background-color: var(--color-oliva);
+  color: var(--color-creme);
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+}
+
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

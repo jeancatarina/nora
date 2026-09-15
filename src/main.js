@@ -2,15 +2,51 @@ import { initScene3D } from './scene3d.js';
 import { initCalculator } from './calculator.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Inicializa Three.js 3D
+  // 1. Inicializa Instalação Cinética 3D
   initScene3D('canvas-container');
 
   // 2. Inicializa Calculadora Operacional
   initCalculator();
 
-  // 3. Controle do Card 4 — Monte do seu jeito (Seleção de Tags)
+  // 3. Cursor de Alta Costura (Desktop)
+  const cursorDot = document.createElement('div');
+  cursorDot.className = 'cursor-dot';
+  const cursorRing = document.createElement('div');
+  cursorRing.className = 'cursor-ring';
+  document.body.appendChild(cursorDot);
+  document.body.appendChild(cursorRing);
+
+  let mousePos = { x: -100, y: -100 };
+  let ringPos = { x: -100, y: -100 };
+
+  window.addEventListener('mousemove', (e) => {
+    mousePos.x = e.clientX;
+    mousePos.y = e.clientY;
+    cursorDot.style.left = `${mousePos.x}px`;
+    cursorDot.style.top = `${mousePos.y}px`;
+  });
+
+  function updateCursorRing() {
+    ringPos.x += (mousePos.x - ringPos.x) * 0.15;
+    ringPos.y += (mousePos.y - ringPos.y) * 0.15;
+    cursorRing.style.left = `${ringPos.x}px`;
+    cursorRing.style.top = `${ringPos.y}px`;
+    requestAnimationFrame(updateCursorRing);
+  }
+  updateCursorRing();
+
+  const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .custom-chip, .service-card, .hiring-card, #canvas-container');
+  interactiveElements.forEach((el) => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  // 4. Controle do Card 4 — Monte do seu jeito (Seleção de Tags & Dossiê Flutuante)
   const chipButtons = document.querySelectorAll('.custom-chip');
   const selectedTags = new Set();
+  const floatingDock = document.getElementById('floating-scope-dock');
+  const floatingBadge = document.getElementById('floating-scope-count');
+  const floatingHours = document.getElementById('floating-scope-hours');
 
   chipButtons.forEach((chip) => {
     chip.addEventListener('click', () => {
@@ -23,8 +59,24 @@ document.addEventListener('DOMContentLoaded', () => {
         selectedTags.add(tag);
       }
       syncModalTags();
+      updateFloatingDock();
     });
   });
+
+  function updateFloatingDock() {
+    if (!floatingDock) return;
+    const count = selectedTags.size;
+    if (count > 0) {
+      floatingDock.classList.add('is-visible');
+      if (floatingBadge) floatingBadge.textContent = `${count} ${count === 1 ? 'rotina' : 'rotinas'}`;
+      if (floatingHours) {
+        const estHours = count * 8;
+        floatingHours.textContent = `~${estHours}h/mês recuperadas para você`;
+      }
+    } else {
+      floatingDock.classList.remove('is-visible');
+    }
+  }
 
   function syncModalTags() {
     const modalTagsContainer = document.getElementById('modal-selected-tags-container');
@@ -51,7 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 4. Modal de Solicitação de Orçamento
+  // 5. Modal de Solicitação de Orçamento
   const modalBackdrop = document.getElementById('quote-modal');
   const openModalButtons = document.querySelectorAll('[data-open-modal="quote"]');
   const closeModalBtn = document.getElementById('modal-close-btn');
@@ -62,7 +114,6 @@ document.addEventListener('DOMContentLoaded', () => {
     modalBackdrop.classList.add('is-active');
     document.body.style.overflow = 'hidden';
 
-    // Se veio de um card específico
     if (presetContext && presetContext !== 'custom') {
       const notesField = document.getElementById('form-notes');
       if (notesField && !notesField.value.includes(presetContext)) {
@@ -104,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 5. Envio do Formulário de Orçamento com Integração WhatsApp
+  // 6. Envio do Formulário de Orçamento com Integração WhatsApp
   if (quoteForm) {
     quoteForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -116,7 +167,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const notes = document.getElementById('form-notes')?.value || '';
       const services = Array.from(selectedTags).join(', ') || 'A definir no alinhamento';
 
-      // Mensagem personalizada estruturada para WhatsApp
       const waMessage = `Olá, NORA! Gostaria de solicitar um orçamento personalizado.\n\n` +
         `• *Nome*: ${name}\n` +
         `• *Atividade/Segmento*: ${segment}\n` +
@@ -129,7 +179,6 @@ document.addEventListener('DOMContentLoaded', () => {
       const encodedMessage = encodeURIComponent(waMessage);
       const waUrl = `https://wa.me/5511999990000?text=${encodedMessage}`;
 
-      // Exibe estado de sucesso e redireciona
       const submitBtn = quoteForm.querySelector('button[type="submit"]');
       if (submitBtn) {
         submitBtn.innerHTML = '✓ Enviando para atendimento WhatsApp...';
@@ -147,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 6. Menu Mobile
+  // 7. Menu Mobile
   const menuToggle = document.getElementById('menu-toggle');
   const mobileDrawer = document.getElementById('mobile-drawer');
 
@@ -172,7 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 7. Efeito sutil no Header ao rolar
+  // 8. Header scroll
   const headerEl = document.querySelector('.site-header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {

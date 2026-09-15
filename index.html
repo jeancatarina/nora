@@ -180,6 +180,8 @@
   </script>
 </head>
 <body>
+  <!-- Archival Handmade Paper Grain Texture Overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
 
   <!-- Site Header -->
   <header class="site-header" role="banner">
@@ -630,6 +632,28 @@
               <div class="calc-stat-number" id="calc-percent-result">Até 64%</div>
               <div class="calc-stat-label">de redução no custo da estrutura administrativa</div>
 
+              <!-- Executive Comparative Visual Bars -->
+              <div class="calc-comparison-bars" style="margin: 1.6rem 0; text-align: left; padding: 1.1rem 1.25rem; background: rgba(244, 237, 226, 0.6); border-radius: var(--radius-xs); border: 1px solid var(--color-border-hairline);">
+                <div style="margin-bottom: 0.9rem;">
+                  <div style="display: flex; justify-content: space-between; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-cafe); margin-bottom: 0.4rem; font-weight: 600;">
+                    <span>Custo Estrutural CLT Integral (160h + Encargos)</span>
+                    <span>100% (Overhead Total)</span>
+                  </div>
+                  <div style="height: 6px; background-color: rgba(73, 60, 53, 0.15); border-radius: 9999px; overflow: hidden;">
+                    <div style="width: 100%; height: 100%; background-color: var(--color-cafe);"></div>
+                  </div>
+                </div>
+                <div>
+                  <div style="display: flex; justify-content: space-between; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--color-oliva); margin-bottom: 0.4rem; font-weight: 600;">
+                    <span>Operação Focada NORA (Apenas o Necessário)</span>
+                    <span id="calc-bar-percent">~36% da estrutura</span>
+                  </div>
+                  <div style="height: 6px; background-color: rgba(114, 122, 91, 0.2); border-radius: 9999px; overflow: hidden;">
+                    <div id="calc-bar-fill" style="width: 36%; height: 100%; background-color: var(--color-oliva); transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);"></div>
+                  </div>
+                </div>
+              </div>
+
               <p class="calc-quote-highlight">
                 “Se você precisa de uma pessoa em tempo integral, contrate uma pessoa.<br/>
                 Se precisa que determinados processos funcionem, talvez você precise da NORA.”
@@ -879,6 +903,17 @@
         </p>
       </form>
     </div>
+  </div>
+
+  <!-- Floating Scope Dock (Ativado dinamicamente ao escolher serviços no Card 4) -->
+  <div class="floating-scope-dock" id="floating-scope-dock" aria-live="polite">
+    <div class="floating-scope-info">
+      <span class="floating-scope-badge" id="floating-scope-count">0 rotinas</span>
+      <span id="floating-scope-hours">~0h/mês recuperadas</span>
+    </div>
+    <a href="#quote-modal" class="btn btn-creme btn-sm" data-open-modal="quote" data-context="custom">
+      Solicitar proposta com este escopo →
+    </a>
   </div>
 
   <!-- Main module script -->
