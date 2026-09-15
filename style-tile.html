@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NORA — Style Tile & Design Board</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/styles/variables.css" />
+  <link rel="stylesheet" href="./src/styles/typography.css" />
+  <link rel="stylesheet" href="./src/styles/layout.css" />
+  <link rel="stylesheet" href="./src/styles/components.css" />
+  <style>
+    .tile-board {
+      max-width: 1100px;
+      margin: 3rem auto;
+      padding: 3rem;
+      background: var(--color-creme);
+      border: 1px solid var(--color-bege-border);
+      border-radius: var(--radius-sm);
+    }
+    .tile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 3rem;
+      margin-top: 2.5rem;
+    }
+    .swatch-group {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+    .swatch {
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-xs);
+      border: 1px solid rgba(0,0,0,0.1);
+      display: flex;
+      align-items: flex-end;
+      padding: 4px;
+      font-size: 9px;
+      font-weight: 600;
+    }
+  </style>
+</head>
+<body>
+  <div class="tile-board">
+    <div style="display: flex; justify-content: space-between; align-items: baseline; border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 1.5rem;">
+      <div>
+        <span class="eyebrow">( STYLE TILE & MATRIZ DE DESIGN )</span>
+        <h1 style="font-size: 3rem; margin-top: 0.5rem;">NORA</h1>
+        <p class="text-caption text-muted">Núcleo de Organização, Relacionamento e Apoio — Atelier Operacional</p>
+      </div>
+      <div style="text-align: right;">
+        <span class="brand-monogram" style="font-size: 1.75rem;">( N )</span>
+        <p class="text-caption text-muted">Identidade Editorial Atemporal</p>
+      </div>
+    </div>
+
+    <div class="tile-grid">
+      <!-- 1. Paleta Proporcional -->
+      <div>
+        <span class="eyebrow">01 / Paleta de Cores</span>
+        <div class="swatch-group">
+          <div class="swatch" style="background: #F4EDE2; color: #493C35;">60%</div>
+          <div class="swatch" style="background: #493C35; color: #F4EDE2;">20%</div>
+          <div class="swatch" style="background: #727A5B; color: #fff;">10%</div>
+          <div class="swatch" style="background: #CFC0AA; color: #493C35;">10%</div>
+          <div class="swatch" style="background: #252525; color: #fff;">txt</div>
+        </div>
+        <p class="text-caption text-muted" style="margin-top: 0.85rem;">
+          Creme (#F4EDE2), Café Profundo (#493C35), Verde Oliva (#727A5B), Bege Areia (#CFC0AA).
+        </p>
+      </div>
+
+      <!-- 2. Tipografia -->
+      <div>
+        <span class="eyebrow">02 / Tipografia</span>
+        <div style="margin-top: 1rem;">
+          <div style="font-family: var(--font-serif); font-size: 1.8rem; color: var(--color-cafe);">Cormorant Garamond</div>
+          <div style="font-family: var(--font-serif); font-style: italic; font-size: 1.2rem; color: var(--color-oliva);">Elegância editorial & alta costura</div>
+          <div style="font-family: var(--font-sans); font-size: 0.95rem; margin-top: 0.5rem; color: var(--color-text-body);">Plus Jakarta Sans — Geometria límpida para interface e números</div>
+        </div>
+      </div>
+
+      <!-- 3. Botões & Ações -->
+      <div>
+        <span class="eyebrow">03 / Botões & Interações</span>
+        <div style="display: flex; flex-direction: column; gap: 0.75rem; margin-top: 1rem; align-items: flex-start;">
+          <button class="btn btn-primary btn-sm">Solicitar orçamento →</button>
+          <button class="btn btn-secondary btn-sm">Falar com a NORA</button>
+          <a href="#" class="editorial-link">Explorar escopo detalhado →</a>
+        </div>
+      </div>
+
+      <!-- 4. Componente de Amostra -->
+      <div>
+        <span class="eyebrow">04 / Amostra Monográfica</span>
+        <div style="padding: 1.25rem 0; border-top: 1px solid var(--color-border-subtle); margin-top: 1rem;">
+          <div style="display: flex; gap: 1rem; align-items: baseline;">
+            <span style="font-family: var(--font-serif); font-style: italic; color: var(--color-oliva);">I.</span>
+            <strong style="font-family: var(--font-serif); font-size: 1.3rem;">Atendimento WhatsApp</strong>
+          </div>
+          <p class="text-caption text-muted" style="margin-top: 0.35rem;">
+            Acolhimento cordial e respostas rotineiras no tom de voz exclusivo da sua marca.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
