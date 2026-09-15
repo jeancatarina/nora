@@ -76,29 +76,31 @@ export function initScrollEffects() {
       heroLightBeam.style.transform = `translate3d(${beamX}px, ${beamY}px, 0) rotate(-22deg)`;
     }
 
+    checkReveals();
     requestAnimationFrame(tick);
   }
-  requestAnimationFrame(tick);
 
-  // 3. Revelação de Linhas Verticais e Conteúdos Editoriais
-  const revealElements = document.querySelectorAll('.reveal-on-scroll');
-  const lineIndicators = document.querySelectorAll('.vertical-accent-line');
+  // 3. Revelação Cinética de Linhas Verticais e Conteúdos Editoriais
+  const revealElements = Array.from(document.querySelectorAll('.reveal-on-scroll'));
+  const lineIndicators = Array.from(document.querySelectorAll('.vertical-accent-line'));
+  let pendingElements = [...revealElements, ...lineIndicators];
 
-  const observerOptions = {
-    threshold: 0.12,
-    rootMargin: '0px 0px -40px 0px'
-  };
-
-  const revealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-revealed');
+  function checkReveals() {
+    if (pendingElements.length === 0) return;
+    const windowH = window.innerHeight || document.documentElement.clientHeight;
+    pendingElements = pendingElements.filter((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top <= windowH * 0.94 && rect.bottom >= -50) {
+        el.classList.add('is-revealed');
+        return false;
       }
+      return true;
     });
-  }, observerOptions);
+  }
 
-  revealElements.forEach(el => revealObserver.observe(el));
-  lineIndicators.forEach(line => revealObserver.observe(line));
+  // Revela elementos visíveis imediatamente
+  checkReveals();
+  requestAnimationFrame(tick);
 
   // 4. Clique suave no indicador de rolagem
   if (scrollIndicator) {

@@ -219,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const submitBtn = quoteForm.querySelector('button[type="submit"]');
       if (submitBtn) {
-        submitBtn.innerHTML = '✓ Abrindo conversa no WhatsApp...';
+        submitBtn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block; vertical-align:middle; margin-right:6px;"><polyline points="20 6 9 17 4 12"></polyline></svg> Abrindo conversa no WhatsApp...';
         submitBtn.classList.add('btn-oliva');
       }
 
@@ -234,7 +234,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Menu Mobile
+  // 8. Menu Mobile & Drawer Interativo
   const menuToggle = document.getElementById('menu-toggle');
   const mobileDrawer = document.getElementById('mobile-drawer');
 
@@ -243,9 +243,11 @@ document.addEventListener('DOMContentLoaded', () => {
       const isOpen = mobileDrawer.classList.contains('is-open');
       if (isOpen) {
         mobileDrawer.classList.remove('is-open');
+        menuToggle.classList.remove('is-active');
         menuToggle.setAttribute('aria-expanded', 'false');
       } else {
         mobileDrawer.classList.add('is-open');
+        menuToggle.classList.add('is-active');
         menuToggle.setAttribute('aria-expanded', 'true');
       }
     });
@@ -254,13 +256,23 @@ document.addEventListener('DOMContentLoaded', () => {
     mobileLinks.forEach((link) => {
       link.addEventListener('click', () => {
         mobileDrawer.classList.remove('is-open');
+        menuToggle.classList.remove('is-active');
         menuToggle.setAttribute('aria-expanded', 'false');
       });
     });
+
+    // Fechar gaveta ao clicar fora
+    document.addEventListener('click', (e) => {
+      if (mobileDrawer.classList.contains('is-open') && !mobileDrawer.contains(e.target) && !menuToggle.contains(e.target)) {
+        mobileDrawer.classList.remove('is-open');
+        menuToggle.classList.remove('is-active');
+        menuToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
   }
 
-  // 9. Header scroll
-  const headerEl = document.querySelector('.site-header');
+  // 9. Header scroll (Suavidade & Glassmorphism)
+  const headerEl = document.querySelector('.site-header-reference, .site-header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
       headerEl?.classList.add('is-scrolled');
