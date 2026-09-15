@@ -1,7 +1,11 @@
 import { initCalculator } from './calculator.js';
+import { initScrollEffects } from './scroll-effects.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Inicializa Calculadora Operacional
+  // 1. Inicializa Efeitos de Scroll & Parallax da Referência
+  initScrollEffects();
+
+  // 2. Inicializa Calculadora Operacional
   initCalculator();
 
   // 2. Cursor de Alta Costura (Desktop)
