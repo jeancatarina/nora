@@ -1,14 +1,10 @@
-import { initScene3D } from './scene3d.js';
 import { initCalculator } from './calculator.js';
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Inicializa Instalação Cinética 3D
-  initScene3D('canvas-container');
-
-  // 2. Inicializa Calculadora Operacional
+  // 1. Inicializa Calculadora Operacional
   initCalculator();
 
-  // 3. Cursor de Alta Costura (Desktop)
+  // 2. Cursor de Alta Costura (Desktop)
   const cursorDot = document.createElement('div');
   cursorDot.className = 'cursor-dot';
   const cursorRing = document.createElement('div');
@@ -35,13 +31,51 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   updateCursorRing();
 
-  const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .custom-chip, .service-card, .hiring-card, #canvas-container');
+  const interactiveElements = document.querySelectorAll('a, button, input, textarea, select, .custom-chip, .monograph-row, .practice-item, .toggle-tab');
   interactiveElements.forEach((el) => {
     el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
     el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
   });
 
-  // 4. Controle do Card 4 — Monte do seu jeito (Seleção de Tags & Dossiê Flutuante)
+  // 3. Controle Interativo: "Antes da NORA vs Com a NORA" (Vida & Emoção Real)
+  const toggleBtnAntes = document.getElementById('toggle-state-antes');
+  const toggleBtnDepois = document.getElementById('toggle-state-depois');
+  const panelAntes = document.getElementById('panel-state-antes');
+  const panelDepois = document.getElementById('panel-state-depois');
+
+  if (toggleBtnAntes && toggleBtnDepois && panelAntes && panelDepois) {
+    toggleBtnAntes.addEventListener('click', () => {
+      toggleBtnAntes.classList.add('is-active');
+      toggleBtnDepois.classList.remove('is-active');
+      panelAntes.classList.add('is-active');
+      panelDepois.classList.remove('is-active');
+    });
+
+    toggleBtnDepois.addEventListener('click', () => {
+      toggleBtnDepois.classList.add('is-active');
+      toggleBtnAntes.classList.remove('is-active');
+      panelDepois.classList.add('is-active');
+      panelAntes.classList.remove('is-active');
+    });
+  }
+
+  // 4. Diálogo Interativo WhatsApp (Como a NORA fala com o seu cliente)
+  const dialogTabs = document.querySelectorAll('.dialog-tab-btn');
+  const dialogMessages = document.querySelectorAll('.dialog-message-pane');
+
+  dialogTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const targetKey = tab.getAttribute('data-dialog');
+      dialogTabs.forEach(t => t.classList.remove('is-active'));
+      dialogMessages.forEach(m => m.classList.remove('is-active'));
+
+      tab.classList.add('is-active');
+      const activePane = document.getElementById(`dialog-pane-${targetKey}`);
+      if (activePane) activePane.classList.add('is-active');
+    });
+  });
+
+  // 5. Controle do Card 4 — Monte do seu jeito (Seleção de Tags & Dossiê Flutuante)
   const chipButtons = document.querySelectorAll('.custom-chip');
   const selectedTags = new Set();
   const floatingDock = document.getElementById('floating-scope-dock');
@@ -103,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 5. Modal de Solicitação de Orçamento
+  // 6. Modal de Orçamento
   const modalBackdrop = document.getElementById('quote-modal');
   const openModalButtons = document.querySelectorAll('[data-open-modal="quote"]');
   const closeModalBtn = document.getElementById('modal-close-btn');
@@ -155,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // 6. Envio do Formulário de Orçamento com Integração WhatsApp
+  // 7. Envio do Formulário WhatsApp
   if (quoteForm) {
     quoteForm.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -181,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const submitBtn = quoteForm.querySelector('button[type="submit"]');
       if (submitBtn) {
-        submitBtn.innerHTML = '✓ Enviando para atendimento WhatsApp...';
+        submitBtn.innerHTML = '✓ Abrindo conversa no WhatsApp...';
         submitBtn.classList.add('btn-oliva');
       }
 
@@ -196,7 +230,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 7. Menu Mobile
+  // 8. Menu Mobile
   const menuToggle = document.getElementById('menu-toggle');
   const mobileDrawer = document.getElementById('mobile-drawer');
 
@@ -221,7 +255,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 8. Header scroll
+  // 9. Header scroll
   const headerEl = document.querySelector('.site-header');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 20) {
