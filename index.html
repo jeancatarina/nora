@@ -77,7 +77,12 @@
     if (window.location.hash) {
       history.replaceState(null, '', window.location.pathname + window.location.search);
     }
-    window.scrollTo(0, 0);
+    const testScroll = parseInt(new URLSearchParams(window.location.search).get('scroll') || '0', 10);
+    if (testScroll > 0) {
+      window.scrollTo(0, testScroll);
+    } else {
+      window.scrollTo(0, 0);
+    }
   </script>
 </head>
 <body>

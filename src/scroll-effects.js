@@ -6,8 +6,11 @@
 export function initScrollEffects() {
   const heroLeaf = document.querySelector('.hero-leaf-art');
   const heroNora = document.querySelector('.hero-display-nora');
+  const heroTagline = document.querySelector('.hero-stacked-tagline');
+  const heroSubtitle = document.querySelector('.hero-reference-subtitle');
   const heroLightBeam = document.querySelector('.hero-sunlight-beam');
   const header = document.querySelector('.site-header-reference');
+  const headerLogo = document.querySelector('.header-logo-serif');
   const scrollIndicator = document.querySelector('.hero-scroll-indicator');
 
   // Elementos cinéticos distribuídos por todo o site
@@ -30,9 +33,42 @@ export function initScrollEffects() {
     targetMouseY = (e.clientY / innerHeight - 0.5) * 2;
   }, { passive: true });
 
+  // 1.5. Geometria Dinâmica para Morphing de Marca de Alta Fidelidade
+  let restingDeltaX = -280;
+  let restingDeltaY = -320;
+  let morphTargetScale = 0.28;
+
+  function updateMorphGeometry() {
+    if (!headerLogo || !heroNora) return;
+    const prevHeroT = heroNora.style.transform;
+    const prevHeaderT = headerLogo.style.transform;
+    heroNora.style.transform = 'none';
+    headerLogo.style.transform = 'none';
+
+    const hRect = headerLogo.getBoundingClientRect();
+    const nRect = heroNora.getBoundingClientRect();
+    const scrollYNow = window.scrollY || window.pageYOffset;
+
+    heroNora.style.transform = prevHeroT;
+    headerLogo.style.transform = prevHeaderT;
+
+    if (nRect.width > 0 && hRect.width > 0) {
+      restingDeltaX = hRect.left - nRect.left;
+      restingDeltaY = hRect.top - (nRect.top + scrollYNow);
+      morphTargetScale = Math.min(Math.max(hRect.height / nRect.height, 0.20), 0.40);
+    }
+  }
+
+  updateMorphGeometry();
+  window.addEventListener('resize', updateMorphGeometry, { passive: true });
+
   // 2. Scroll Physics Loop
-  let currentScrollY = window.scrollY || window.pageYOffset;
+  const urlScroll = parseInt(new URLSearchParams(window.location.search).get('scroll') || '0', 10);
+  let currentScrollY = urlScroll > 0 ? urlScroll : (window.scrollY || window.pageYOffset);
   let targetScrollY = currentScrollY;
+  if (urlScroll > 0) {
+    window.scrollTo(0, urlScroll);
+  }
 
   window.addEventListener('scroll', () => {
     targetScrollY = window.scrollY || window.pageYOffset;
@@ -50,11 +86,74 @@ export function initScrollEffects() {
 
     // Header fixo refinado com blur na rolagem
     if (header) {
-      if (currentScrollY > 30) {
+      if (currentScrollY > 40) {
         header.classList.add('is-scrolled');
       } else {
         header.classList.remove('is-scrolled');
       }
+    }
+
+    // ==========================================
+    // TRANSIÇÃO DE MARCA NORA (HERO -> HEADER MORPH)
+    // Na primeira página não aparece o NORA no header;
+    // Conforme o scroll desce, o NORA monumental do hero
+    // sobe, reduz e se transforma de forma contínua no NORA do header.
+    // ==========================================
+    const morphDistance = 280;
+    const morphP = Math.min(Math.max(currentScrollY / morphDistance, 0), 1);
+
+    // 1. NORA Monumental do Hero (metamorfose, redução e voo até a posição do header)
+    if (heroNora && currentScrollY < windowH * 1.5) {
+      if (morphP < 1) {
+        const easeP = morphP * morphP * (3 - 2 * morphP);
+        const noraScale = 1 - ((1 - morphTargetScale) * easeP);
+        const noraTransX = -mouseX * 8 * (1 - easeP) + (restingDeltaX * easeP);
+        const noraTransY = (restingDeltaY + currentScrollY) * easeP;
+        
+        const noraOpacity = morphP < 0.65 ? 1 : Math.max(1 - ((morphP - 0.65) / 0.35), 0);
+        const shadowAlpha = 0.2 * (1 - morphP);
+        const shadowSpread = 28 * (1 - morphP);
+        const shadowX = (14 - mouseX * 10) * (1 - morphP);
+        const shadowY = (18 - mouseY * 10) * (1 - morphP);
+
+        heroNora.style.transform = `translate3d(${noraTransX}px, ${noraTransY}px, 0) scale(${noraScale})`;
+        heroNora.style.opacity = `${noraOpacity}`;
+        heroNora.style.textShadow = `${shadowX}px ${shadowY}px ${shadowSpread}px rgba(60, 66, 48, ${shadowAlpha})`;
+      } else {
+        heroNora.style.opacity = '0';
+      }
+    }
+
+    // 2. Logo NORA no Header (surge e assume o posto no exato instante da atracação)
+    if (headerLogo) {
+      if (morphP <= 0.65) {
+        headerLogo.style.opacity = '0';
+        headerLogo.style.pointerEvents = 'none';
+        headerLogo.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      } else if (morphP < 1) {
+        const dockProgress = (morphP - 0.65) / 0.35;
+        headerLogo.style.opacity = `${dockProgress}`;
+        headerLogo.style.pointerEvents = morphP >= 0.85 ? 'auto' : 'none';
+        headerLogo.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      } else {
+        headerLogo.style.opacity = '1';
+        headerLogo.style.pointerEvents = 'auto';
+        headerLogo.style.transform = 'translate3d(0, 0, 0) scale(1)';
+      }
+    }
+
+    // 3. Textos do Hero (tagline e subtítulo esvanecem suavemente durante a transição da marca)
+    if (heroTagline && currentScrollY < windowH * 1.5) {
+      heroTagline.style.opacity = `${Math.max(1 - (morphP * 1.5), 0)}`;
+    }
+    if (heroSubtitle && currentScrollY < windowH * 1.5) {
+      heroSubtitle.style.opacity = `${Math.max(1 - (morphP * 1.5), 0)}`;
+    }
+
+    // 4. Indicador de scroll (desaparece nos primeiros pixels rolados)
+    if (scrollIndicator && currentScrollY < windowH * 0.8) {
+      scrollIndicator.style.opacity = `${Math.max(1 - (currentScrollY / 120), 0)}`;
+      scrollIndicator.style.pointerEvents = currentScrollY > 100 ? 'none' : 'auto';
     }
 
     // ==========================================
@@ -69,14 +168,6 @@ export function initScrollEffects() {
       const posY = scrollYOffset + mouseY * 12;
 
       heroLeaf.style.transform = `translate3d(${posX}px, ${posY}px, 0) rotate(${scrollRotate}deg) perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
-    }
-
-    if (heroNora && currentScrollY < windowH * 1.5) {
-      const noraScroll = currentScrollY * 0.12;
-      const shadowX = 14 - mouseX * 10;
-      const shadowY = 18 - mouseY * 10;
-      heroNora.style.transform = `translate3d(${-mouseX * 8}px, ${noraScroll}px, 0)`;
-      heroNora.style.textShadow = `${shadowX}px ${shadowY}px 28px rgba(60, 66, 48, 0.2)`;
     }
 
     if (heroLightBeam && currentScrollY < windowH * 1.5) {

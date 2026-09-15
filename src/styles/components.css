@@ -1528,11 +1528,15 @@
   color: #484F39;
   text-decoration: none;
   line-height: 1;
-  transition: opacity var(--transition-fast);
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(0, 10px, 0) scale(0.92);
+  transform-origin: left center;
+  will-change: opacity, transform;
 }
 
 .header-logo-serif:hover {
-  opacity: 0.8;
+  opacity: 0.78 !important;
 }
 
 .header-right-nav {
@@ -1619,7 +1623,8 @@
   margin: 0;
   text-shadow: 14px 18px 26px rgba(60, 66, 48, 0.2);
   user-select: none;
-  will-change: transform, text-shadow;
+  transform-origin: top left;
+  will-change: transform, opacity, text-shadow;
 }
 
 .hero-stacked-tagline {
@@ -1632,16 +1637,17 @@
   text-transform: uppercase;
   font-weight: 600;
   color: #727A5F;
+  will-change: opacity;
 }
 
 .hero-reference-subtitle {
   font-family: var(--font-sans);
   font-size: clamp(1.05rem, 1.28vw, 1.25rem);
   line-height: 1.65;
-  color: #4B523D;
-  font-weight: 350;
-  max-width: 460px;
-  margin-bottom: 2.5rem;
+  color: #555D46;
+  max-width: 540px;
+  margin-bottom: 2.25rem;
+  will-change: opacity;
 }
 
 .hero-conhecer-link {
