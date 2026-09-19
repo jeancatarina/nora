@@ -1,93 +1,57 @@
 # NORAH — A operação por trás do seu negócio
 
-Website institucional da **Norah** (*Núcleo de Organização, Relacionamento e Apoio Humanizado*), operação boutique de apoio administrativo remoto e relacionamento para profissionais autônomos, consultórios, clínicas, pequenos negócios e empresas de serviços.
+Site institucional da Norah — Núcleo de Organização, Relacionamento e Apoio Humanizado. A Norah oferece apoio administrativo remoto, atendimento e relacionamento para profissionais autônomos, clínicas, consultórios, empresas de serviços e pequenos negócios.
 
-> *"Nem toda a operação do seu negócio precisa depender de você."*
+## Conteúdo e posicionamento
 
----
+- Frentes de atuação: Atendimento & Relacionamento, Agenda & Rotina de Clientes, Organização Administrativa, Financeiro Operacional e Apoio à Operação.
+- Processo personalizado: Entender → Mapear → Dimensionar → Personalizar → Operar.
+- Capacidades Essencial, Profissional e Integral como referências de capacidade operacional, sem preços ou pacotes fixos de tarefas.
+- Comunicação explícita de que a contratação não é por hora ou tarefa, e de que o financeiro é operacional — não contábil, consultivo ou decisório.
+- Formulário de conversa que monta uma mensagem para o WhatsApp oficial da Norah.
 
-## 🏛️ Identidade Visual & Design Editorial
+## SEO e acessibilidade
 
-- **Paleta Proporcional**:
-  - `60%` **Creme** (`#F4EDE2`): Fundos principais, leveza e respiração editorial.
-  - `20%` **Café Profundo** (`#493C35`): Tipografia primária, rodapé e heroico CTA final.
-  - `10%` **Verde Oliva** (`#727A5B`): Acentos refinados, tags ativas, badges e marcadores.
-  - `10%` **Bege Areia** (`#CFC0AA`): Bordas sutis e divisores elegantes.
-  - **Preto Suave** (`#252525`): Textos corridos com contraste acessível (WCAG AAA).
-- **Tipografia**: *Playfair Display* (serifa editorial nobre) com *Plus Jakarta Sans* (geometria e legibilidade moderna).
-- **Composição**: Respiração generosa, grid editorial, microinterações discretas, sem glassmorphism exagerado ou aparência de template genérico.
+- HTML semântico, hierarquia de headings, textos alternativos e estados de foco visíveis.
+- Schema.org para `Organization`/`ProfessionalService` e `FAQPage`.
+- Metadados Open Graph e Twitter Card.
+- `robots.txt`, `sitemap.xml` e canonical apontando para a publicação atual.
+- Identidade editorial recuperada da versão anterior: marca monumental, textura de parede, luz natural, folhagem e transição da marca na rolagem.
+- Fontes Cormorant Garamond e Plus Jakarta Sans hospedadas localmente; imagens WebP e conteúdo principal disponível sem JavaScript.
 
----
+## Desenvolvimento
 
-## ✨ Funcionalidades
+Requer Node.js 18 ou superior.
 
-- **Frentes e capacidades**:
-  - Cinco frentes: atendimento, agenda, organização administrativa, financeiro operacional e apoio à operação.
-  - Capacidades Essencial, Profissional e Integral como referências de dimensionamento, sem pacotes de tarefas ou preços fixos.
-- **SEO Técnico para 1ª Página do Google**:
-  - HTML5 semântico com indexação estática instantânea.
-  - Dados estruturados Schema.org JSON-LD (`ProfessionalService`, `FAQPage`, `BreadcrumbList`).
-  - Metatags completas Open Graph e Twitter Cards.
-  - Arquivos `robots.txt` e `sitemap.xml` configurados.
-- **Modal de conversa & WhatsApp**:
-  - Formulário modal com seleção opcional das frentes e descrição do principal gargalo.
-  - Geração de link pré-formatado para o WhatsApp oficial da Norah.
-
----
-
-## 🚀 Como Executar
-
-### Pré-requisitos
-- [Node.js](https://nodejs.org/) (v18+)
-
-### Instalação e Desenvolvimento
 ```bash
-# Clone o repositório
-git clone https://github.com/jeancatarina/nora.git
-cd nora
-
-# Instale as dependências
 npm install
-
-# Inicie o servidor de desenvolvimento
 npm run dev
 ```
 
-### Visualização Estática Direta
-O projeto também roda perfeitamente em qualquer servidor HTTP estático, sem necessidade de build:
+Para gerar o build de produção:
+
 ```bash
-npx serve .
-# ou com Python:
-python3 -m http.server 3000
+npm run build
+npm run preview
 ```
 
----
+O build é gerado em `dist/` pelo Vite. A publicação atual do GitHub Pages serve a raiz da branch `main`; os caminhos também funcionam nessa publicação estática.
 
-## 📁 Estrutura de Pastas
+## Publicação atual
 
-```
-nora/
-├── index.html              # HTML5 semântico + SEO JSON-LD + Metatags
-├── favicon.svg             # Monograma tipográfico SVG
-├── og-image.svg            # Card Open Graph para redes sociais
-├── robots.txt              # Instruções para Googlebot
-├── sitemap.xml             # Mapa do site para indexação
-├── package.json            # Configurações do projeto
-├── vite.config.js          # Configurações Vite
-└── src/
-    ├── main.js             # Menu, modal, WhatsApp e interações leves
-    ├── vendor/
-    │   └── three.module.js # Three.js minificado
-    └── styles/
-        ├── variables.css   # Paleta (#493C35, #F4EDE2, #727A5B, #CFC0AA)
-        ├── typography.css  # Playfair Display + Plus Jakarta Sans
-        ├── layout.css      # Grid editorial e espaçamento
-        ├── components.css  # Cards, tags selecionáveis, modal
-        └── animations.css  # Microinterações discretas
+O site está publicado em [jeancatarina.github.io/nora](https://jeancatarina.github.io/nora/). Quando `sounorah.com.br` for conectado, será necessário atualizar o domínio do Pages e os campos `canonical`, Open Graph, JSON-LD, `robots.txt` e `sitemap.xml`.
+
+## Estrutura principal
+
+```text
+index.html                  Conteúdo, SEO e dados estruturados
+src/main.js                 Menu, modal, formulário e interações leves
+src/styles/site.css         Sistema visual responsivo
+src/styles/editorial.css    Identidade visual original adaptada ao novo conteúdo
+src/editorial-motion.js     Transição da marca e movimento da folhagem
+src/fonts/                  Fontes locais e licenças
+public/images/              Imagens usadas pelo build Vite
+images/                     Cópias necessárias à publicação legada do Pages
 ```
 
----
-
-## 📄 Licença
-
-Projeto desenvolvido para **NORA — Núcleo de Organização, Relacionamento e Apoio**. Todos os direitos reservados.
+Projeto proprietário da Norah.

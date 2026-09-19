@@ -1,4 +1,7 @@
+import { initEditorialMotion } from './editorial-motion.js';
+
 const WHATSAPP_NUMBER = '5547988639872';
+initEditorialMotion();
 
 document.documentElement.classList.add('js');
 
@@ -8,6 +11,8 @@ const modal = document.querySelector('#quote-modal');
 const modalClose = document.querySelector('#modal-close');
 const quoteForm = document.querySelector('#quote-form');
 const firstModalField = document.querySelector('#form-name');
+const notesField = document.querySelector('#form-notes');
+const defaultNotesPlaceholder = notesField?.getAttribute('placeholder') || '';
 let lastFocusedElement = null;
 
 function setMenu(open) {
@@ -16,8 +21,13 @@ function setMenu(open) {
   menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
   mobileNav.setAttribute('aria-hidden', String(!open));
   mobileNav.classList.toggle('is-open', open);
+  menuToggle.classList.toggle('is-active', open);
   if (open) mobileNav.removeAttribute('inert');
-  else mobileNav.setAttribute('inert', '');
+  else {
+    mobileNav.setAttribute('inert', '');
+    if (mobileNav.contains(document.activeElement)) menuToggle.focus();
+  }
+  if (open) window.requestAnimationFrame(() => mobileNav.querySelector('a, button')?.focus());
 }
 
 menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
@@ -28,8 +38,10 @@ function openModal(context = '') {
   lastFocusedElement = document.activeElement;
   modal.hidden = false;
   document.body.classList.add('modal-open');
-  const notes = document.querySelector('#form-notes');
-  if (notes && context) notes.placeholder = `Interesse inicial: ${context}. Conte brevemente o que está pesando na sua rotina...`;
+  document.querySelectorAll('body > header, body > main, body > footer').forEach(element => { element.inert = true; });
+  if (notesField) notesField.placeholder = context
+    ? `Interesse inicial: ${context}. Conte brevemente o que está pesando na sua rotina...`
+    : defaultNotesPlaceholder;
   window.requestAnimationFrame(() => firstModalField?.focus());
 }
 
@@ -37,6 +49,7 @@ function closeModal() {
   if (!modal) return;
   modal.hidden = true;
   document.body.classList.remove('modal-open');
+  document.querySelectorAll('body > header, body > main, body > footer').forEach(element => { element.inert = false; });
   lastFocusedElement?.focus?.();
 }
 
@@ -52,7 +65,28 @@ modal?.addEventListener('click', (event) => {
   if (event.target === modal) closeModal();
 });
 document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape' && modal && !modal.hidden) closeModal();
+  if (modal && !modal.hidden && event.key === 'Tab') {
+    const focusable = [...modal.querySelectorAll('button, input, textarea, select, a[href]')]
+      .filter((element) => !element.disabled && element.getClientRects().length);
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+    if (first && last) {
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    }
+  }
+  if (event.key === 'Escape') {
+    if (modal && !modal.hidden) closeModal();
+    else if (menuToggle?.getAttribute('aria-expanded') === 'true') {
+      setMenu(false);
+      menuToggle.focus();
+    }
+  }
 });
 
 quoteForm?.addEventListener('submit', (event) => {

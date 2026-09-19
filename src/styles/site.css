@@ -133,7 +133,9 @@ p { font-size: 1.06rem; }
 .comparison-layout { align-items: center; }
 .comparison-card { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 1.4rem; padding: 2rem; border: 1px solid var(--line-light); }
 .comparison-card span { color: #d5dfbd; font-size: .72rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
-.comparison-card p { margin: .75rem 0 0; color: #eee6db; font-size: .96rem; }
+.comparison-card ul { display: grid; gap: .65rem; padding: 0; margin: .9rem 0 0; list-style: none; }
+.comparison-card li { position: relative; padding-left: 1rem; color: #eee6db; font-size: .96rem; }
+.comparison-card li::before { position: absolute; left: 0; top: .7em; width: 4px; height: 4px; border-radius: 50%; background: #b9c588; content: ''; }
 .comparison-divider { color: #b9c588; font-family: var(--serif); font-size: 2rem; }
 
 /* Audience and FAQ */
