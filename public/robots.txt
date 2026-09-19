@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://norasuporte.com.br/sitemap.xml
+Sitemap: https://jeancatarina.github.io/nora/sitemap.xml
