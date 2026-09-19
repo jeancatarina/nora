@@ -2,11 +2,11 @@
   "name": "nora-boutique",
   "version": "1.0.0",
   "private": true,
-  "description": "NORA — Núcleo de Organização, Relacionamento e Apoio. Suporte administrativo boutique para profissionais autônomos e pequenos negócios.",
+  "description": "Norah — Núcleo de Organização, Relacionamento e Apoio Humanizado. Apoio administrativo remoto para profissionais autônomos e pequenos negócios.",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "node build.js",
+    "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {

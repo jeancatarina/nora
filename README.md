@@ -1,6 +1,6 @@
-# NORA — Gestão, Atendimento & Suporte Administrativo Boutique
+# NORAH — A operação por trás do seu negócio
 
-Website institucional e interativo da **NORA** (*Núcleo de Organização, Relacionamento e Apoio*), empresa boutique de serviços e suporte administrativo remoto voltada para profissionais autônomos, consultórios, clínicas, pequenos negócios e empresas de serviços.
+Website institucional da **Norah** (*Núcleo de Organização, Relacionamento e Apoio Humanizado*), operação boutique de apoio administrativo remoto e relacionamento para profissionais autônomos, consultórios, clínicas, pequenos negócios e empresas de serviços.
 
 > *"Nem toda a operação do seu negócio precisa depender de você."*
 
@@ -21,25 +21,17 @@ Website institucional e interativo da **NORA** (*Núcleo de Organização, Relac
 
 ## ✨ Funcionalidades
 
-- **Experiência 3D Interativa em Three.js**:
-  - Conceito: *"Transformar complexidade em organização"*.
-  - Tarefas, documentos, mensagens, eventos de agenda e processos começam dispersos e convergem suavemente para uma matriz organizada conforme o usuário rola a página ou move o cursor.
-  - Otimizado com `IntersectionObserver` para pausar rendering quando fora de foco (0% de impacto na bateria).
-- **Formatos de Contratação**:
-  - 4 cards apresentando modelos comuns de apoio: **Agenda**, **Atendimento**, **Administrativo** e **Monte do seu jeito** (Card 4 com 15 tags interativas selecionáveis).
-  - *Sem exibição de preços fixos* — todo orçamento é personalizado sob medida.
-- **Calculadora de Economia Operacional**:
-  - Apresenta a economia comparativa de terceirizar rotinas versus carregar os custos integrais de um funcionário interno CLT (encargos, FGTS, 13º, férias + 1/3, benefícios e ociosidade de horas).
-  - Resultado em percentual marcante (*"Até 64% de redução no custo da estrutura administrativa"*).
-  - Gaveta expansível *"Ver como calculamos"* com premissas detalhadas e controles interativos.
+- **Frentes e capacidades**:
+  - Cinco frentes: atendimento, agenda, organização administrativa, financeiro operacional e apoio à operação.
+  - Capacidades Essencial, Profissional e Integral como referências de dimensionamento, sem pacotes de tarefas ou preços fixos.
 - **SEO Técnico para 1ª Página do Google**:
   - HTML5 semântico com indexação estática instantânea.
   - Dados estruturados Schema.org JSON-LD (`ProfessionalService`, `FAQPage`, `BreadcrumbList`).
   - Metatags completas Open Graph e Twitter Cards.
   - Arquivos `robots.txt` e `sitemap.xml` configurados.
-- **Modal de Orçamento & WhatsApp**:
-  - Formulário modal com sincronização automática das tags selecionadas no Card 4.
-  - Geração de link pré-formatado direto para atendimento no WhatsApp.
+- **Modal de conversa & WhatsApp**:
+  - Formulário modal com seleção opcional das frentes e descrição do principal gargalo.
+  - Geração de link pré-formatado para o WhatsApp oficial da Norah.
 
 ---
 
@@ -83,9 +75,7 @@ nora/
 ├── package.json            # Configurações do projeto
 ├── vite.config.js          # Configurações Vite
 └── src/
-    ├── main.js             # Inicializador, controle de modal e tags
-    ├── scene3d.js          # Experiência 3D Three.js
-    ├── calculator.js       # Calculadora de economia operacional
+    ├── main.js             # Menu, modal, WhatsApp e interações leves
     ├── vendor/
     │   └── three.module.js # Three.js minificado
     └── styles/

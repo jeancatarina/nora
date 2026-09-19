@@ -6,7 +6,7 @@
   <circle cx="600" cy="315" r="400" fill="#727A5B" fill-opacity="0.08"/>
 
   <!-- Brand text -->
-  <text x="600" y="240" font-family="'Playfair Display', Georgia, serif" font-size="88" font-weight="600" fill="#F4EDE2" text-anchor="middle" letter-spacing="4">NORA</text>
+  <text x="600" y="240" font-family="'Playfair Display', Georgia, serif" font-size="88" font-weight="600" fill="#F4EDE2" text-anchor="middle" letter-spacing="4">NORAH</text>
   <text x="600" y="295" font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="20" font-weight="600" fill="#727A5B" text-anchor="middle" letter-spacing="8">GESTÃO • ATENDIMENTO • SUPORTE</text>
   
   <text x="600" y="380" font-family="'Playfair Display', Georgia, serif" font-size="34" fill="#F4EDE2" text-anchor="middle" font-style="italic">Nem toda a operação do seu negócio precisa depender de você.</text>

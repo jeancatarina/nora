@@ -2,16 +2,11 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
-    target: 'esnext',
+    target: 'es2022',
     minify: 'esbuild',
     cssMinify: true,
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          three: ['three']
-        }
-      }
-    }
+    assetsDir: 'assets',
+    sourcemap: false
   },
   server: {
     port: 3000,
