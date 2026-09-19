@@ -1,5 +1,3 @@
-import './styles/site.css';
-
 const WHATSAPP_NUMBER = '5547988639872';
 
 document.documentElement.classList.add('js');
