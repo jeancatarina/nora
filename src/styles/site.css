@@ -66,10 +66,10 @@ em { color: var(--olive); font-style: italic; font-weight: 400; }
 .hero::after { position: absolute; z-index: -1; inset: 0; content: ''; background: linear-gradient(90deg, rgba(244,237,226,.16), transparent 65%); }
 .hero-inner { position: relative; z-index: 2; width: min(calc(100% - 9rem), 1320px); margin: auto; padding: 9rem 0 5.5rem; }
 .hero-lockup { display: flex; align-items: baseline; gap: clamp(1.2rem, 3vw, 3.2rem); }
-.hero-word { position: relative; z-index: 2; margin: 0; color: #424935; font-family: var(--serif); font-size: clamp(7rem, 18.5vw, 16.8rem); letter-spacing: -.07em; line-height: .74; text-shadow: 14px 18px 27px rgba(60, 66, 48, .19); transform-origin: top left; will-change: transform, opacity; }
+.hero-word { position: relative; z-index: 2; margin: 0; color: #424935; font-family: var(--serif); font-size: clamp(5.1rem, 12.5vw, 11.5rem); letter-spacing: -.025em; line-height: .82; text-shadow: 14px 18px 26px rgba(60, 66, 48, .2); transform-origin: top left; will-change: transform, opacity; }
 .hero h1 { position: relative; z-index: 3; width: min-content; min-width: 150px; margin: 0; color: #667050; font-family: var(--sans); font-size: clamp(.68rem, 1vw, .82rem); font-weight: 600; letter-spacing: .24em; line-height: 1.66; text-transform: uppercase; transition: opacity .15s linear; }
 .hero-intro { margin: 2.55rem 0 2rem; color: #555e46; font-size: clamp(1.05rem, 1.3vw, 1.23rem); line-height: 1.64; transition: opacity .15s linear; }
-.hero-leaf { position: absolute; z-index: 1; right: -13%; bottom: -8%; width: clamp(320px, 38vw, 620px); max-width: 85vw; filter: drop-shadow(-20px 20px 35px rgba(50,56,40,.22)); pointer-events: none; transform-origin: bottom right; will-change: transform; }
+.hero-leaf { position: absolute; z-index: 1; right: -4%; bottom: -8%; width: clamp(320px, 38vw, 620px); max-width: 85vw; filter: saturate(1.14) contrast(1.03) drop-shadow(-20px 20px 35px rgba(50,56,40,.22)); pointer-events: none; transform-origin: bottom right; will-change: transform; }
 .hero-leaf img { width: 100%; height: auto; }
 .hero-aside { position: absolute; z-index: 2; right: 1.6rem; bottom: 2rem; margin: 0; color: #697250; font-size: .62rem; font-weight: 600; letter-spacing: .21em; text-transform: uppercase; writing-mode: vertical-rl; }
 .text-link { display: inline-flex; align-items: center; gap: 1.25rem; padding-bottom: .35rem; border-bottom: 1px solid currentColor; color: var(--olive); font-size: .75rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; transition: gap .2s var(--ease); }
@@ -210,10 +210,10 @@ footer { padding: 5rem 0 1.5rem; background: var(--coffee-dark); color: #dcd4cb;
   .hero { min-height: 720px; background-position: 58% top; }
   .hero-inner { padding: 8rem 0 4rem; }
   .hero-lockup { display: block; }
-  .hero-word { font-size: clamp(5.3rem, 25vw, 9.5rem); }
+  .hero-word { font-size: clamp(4.8rem, 24vw, 7.5rem); line-height: .88; }
   .hero h1 { width: auto; min-width: 0; margin-top: 1.5rem; font-size: .7rem; }
   .hero-intro { max-width: 280px; }
-  .hero-leaf { right: -30vw; bottom: -9%; width: min(82vw, 480px); opacity: .58; }
+  .hero-leaf { right: -10%; bottom: -6%; width: clamp(280px, 68vw, 420px); opacity: .94; }
   .hero-aside { display: none; }
   .section { padding-block: 6rem; }
   .section-action { align-items: flex-start; flex-direction: column; }
