@@ -5,7 +5,7 @@ Site institucional da Norah — Núcleo de Organização, Relacionamento e Apoio
 ## Conteúdo e posicionamento
 
 - Frentes de atuação: Atendimento & Relacionamento, Agenda & Rotina de Clientes, Organização Administrativa, Financeiro Operacional e Apoio à Operação.
-- Processo personalizado: Entender → Mapear → Dimensionar → Personalizar → Operar.
+- Processo personalizado: Entender, Mapear, Dimensionar, Personalizar e Operar.
 - Capacidades Essencial, Profissional e Integral como referências de capacidade operacional, sem preços ou pacotes fixos de tarefas.
 - Comunicação explícita de que a contratação não é por hora ou tarefa, e de que o financeiro é operacional — não contábil, consultivo ou decisório.
 - Formulário de conversa que monta uma mensagem para o WhatsApp oficial da Norah.
@@ -35,7 +35,7 @@ npm run build
 npm run preview
 ```
 
-O build é gerado em `dist/` pelo Vite. A publicação atual do GitHub Pages serve a raiz da branch `main`; os caminhos também funcionam nessa publicação estática.
+O build é gerado em `dist/` pelo Vite. A publicação atual do GitHub Pages usa a raiz da branch `main`, que mantém a mesma experiência sem etapa de servidor.
 
 ## Publicação atual
 
@@ -47,11 +47,10 @@ O site está publicado em [jeancatarina.github.io/nora](https://jeancatarina.git
 index.html                  Conteúdo, SEO e dados estruturados
 src/main.js                 Menu, modal, formulário e interações leves
 src/styles/site.css         Sistema visual responsivo
-src/styles/editorial.css    Identidade visual original adaptada ao novo conteúdo
 src/editorial-motion.js     Transição da marca e movimento da folhagem
 src/fonts/                  Fontes locais e licenças
-public/images/              Imagens usadas pelo build Vite
-images/                     Cópias necessárias à publicação legada do Pages
+public/images/              Imagens WebP usadas pelo site
+robots.txt e sitemap.xml    Arquivos de indexação da publicação atual
 ```
 
 Projeto proprietário da Norah.
