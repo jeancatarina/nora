@@ -1,48 +1,36 @@
-import { initEditorialMotion } from './editorial-motion.js';
-
 const WHATSAPP_NUMBER = '5547988639872';
-initEditorialMotion();
-
-document.documentElement.classList.add('js');
-
+const header = document.querySelector('.site-header');
 const menuToggle = document.querySelector('#menu-toggle');
-const mobileNav = document.querySelector('#mobile-nav');
+const navigation = document.querySelector('#mobile-nav');
 const modal = document.querySelector('#quote-modal');
 const modalClose = document.querySelector('#modal-close');
-const quoteForm = document.querySelector('#quote-form');
-const firstModalField = document.querySelector('#form-name');
-const notesField = document.querySelector('#form-notes');
-const defaultNotesPlaceholder = notesField?.getAttribute('placeholder') || '';
-let lastFocusedElement = null;
+const form = document.querySelector('#quote-form');
+const areaField = document.querySelector('#form-area');
+let lastFocused = null;
 
 function setMenu(open) {
-  if (!menuToggle || !mobileNav) return;
-  menuToggle.setAttribute('aria-expanded', String(open));
-  menuToggle.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
-  mobileNav.setAttribute('aria-hidden', String(!open));
-  mobileNav.classList.toggle('is-open', open);
-  menuToggle.classList.toggle('is-active', open);
-  if (open) mobileNav.removeAttribute('inert');
-  else {
-    mobileNav.setAttribute('inert', '');
-    if (mobileNav.contains(document.activeElement)) menuToggle.focus();
-  }
-  if (open) window.requestAnimationFrame(() => mobileNav.querySelector('a, button')?.focus());
+  menuToggle?.setAttribute('aria-expanded', String(open));
+  menuToggle?.setAttribute('aria-label', open ? 'Fechar menu' : 'Abrir menu');
+  menuToggle?.classList.toggle('active', open);
+  navigation?.classList.toggle('open', open);
+  navigation?.setAttribute('aria-hidden', String(!open));
+  if (open) navigation?.removeAttribute('inert'); else navigation?.setAttribute('inert', '');
 }
 
-menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
-mobileNav?.querySelectorAll('a, button').forEach((link) => link.addEventListener('click', () => setMenu(false)));
+function setContext(context) {
+  if (!areaField) return;
+  const match = [...areaField.options].find(option => option.value === context || context.includes(option.value));
+  areaField.value = match?.value || '';
+}
 
 function openModal(context = '') {
   if (!modal) return;
-  lastFocusedElement = document.activeElement;
+  lastFocused = document.activeElement;
+  setContext(context);
   modal.hidden = false;
   document.body.classList.add('modal-open');
   document.querySelectorAll('body > header, body > main, body > footer').forEach(element => { element.inert = true; });
-  if (notesField) notesField.placeholder = context
-    ? `Interesse inicial: ${context}. Conte brevemente o que está pesando na sua rotina...`
-    : defaultNotesPlaceholder;
-  window.requestAnimationFrame(() => firstModalField?.focus());
+  requestAnimationFrame(() => areaField?.focus());
 }
 
 function closeModal() {
@@ -50,87 +38,51 @@ function closeModal() {
   modal.hidden = true;
   document.body.classList.remove('modal-open');
   document.querySelectorAll('body > header, body > main, body > footer').forEach(element => { element.inert = false; });
-  lastFocusedElement?.focus?.();
+  lastFocused?.focus?.();
 }
 
-document.querySelectorAll('[data-open-modal]').forEach((trigger) => {
-  trigger.addEventListener('click', (event) => {
-    if (trigger.tagName === 'A') event.preventDefault();
-    openModal(trigger.dataset.context || '');
-  });
-});
-
+menuToggle?.addEventListener('click', () => setMenu(menuToggle.getAttribute('aria-expanded') !== 'true'));
+navigation?.querySelectorAll('a, button').forEach(item => item.addEventListener('click', () => setMenu(false)));
+document.querySelectorAll('[data-open-modal]').forEach(trigger => trigger.addEventListener('click', event => {
+  if (trigger.tagName === 'A') event.preventDefault();
+  openModal(trigger.dataset.context || '');
+}));
 modalClose?.addEventListener('click', closeModal);
-modal?.addEventListener('click', (event) => {
-  if (event.target === modal) closeModal();
-});
-document.addEventListener('keydown', (event) => {
-  if (modal && !modal.hidden && event.key === 'Tab') {
-    const focusable = [...modal.querySelectorAll('button, input, textarea, select, a[href]')]
-      .filter((element) => !element.disabled && element.getClientRects().length);
-    const first = focusable[0];
-    const last = focusable[focusable.length - 1];
-    if (first && last) {
-      if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-      }
-    }
-  }
+modal?.addEventListener('click', event => { if (event.target === modal) closeModal(); });
+
+document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     if (modal && !modal.hidden) closeModal();
-    else if (menuToggle?.getAttribute('aria-expanded') === 'true') {
-      setMenu(false);
-      menuToggle.focus();
-    }
+    else if (menuToggle?.getAttribute('aria-expanded') === 'true') setMenu(false);
   }
+  if (event.key !== 'Tab' || !modal || modal.hidden) return;
+  const focusable = [...modal.querySelectorAll('button,input,textarea,select')].filter(element => !element.disabled);
+  const first = focusable[0];
+  const last = focusable.at(-1);
+  if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+  else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
 });
 
-quoteForm?.addEventListener('submit', (event) => {
+form?.addEventListener('submit', event => {
   event.preventDefault();
-  const data = new FormData(quoteForm);
-  const areas = data.getAll('areas');
-  const name = data.get('name') || '';
-  const segment = data.get('segment') || '';
-  const phone = data.get('phone') || '';
-  const notes = data.get('notes') || 'A definir em conversa';
-  const message = [
-    'Olá, Norah! Gostaria de conversar sobre a operação do meu negócio.',
-    '',
-    `Nome: ${name}`,
-    `Profissão ou segmento: ${segment}`,
-    `Meu WhatsApp: ${phone}`,
-    `Frentes de interesse: ${areas.length ? areas.join(', ') : 'A definir em conversa'}`,
-    `O que está pesando na rotina: ${notes}`,
-    '',
-    'Podemos entender juntos o escopo ideal?'
-  ].join('\n');
-  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`, '_blank', 'noopener,noreferrer');
+  const data = new FormData(form);
+  const name = String(data.get('name') || '').trim();
+  const segment = String(data.get('segment') || '').trim();
+  const area = String(data.get('area') || '').trim();
+  const notes = String(data.get('notes') || '').trim();
+  const message = ['Olá, Norah! Gostaria de conversar sobre a operação do meu negócio.'];
+  if (name) message.push('', `Meu nome: ${name}`);
+  if (segment) message.push(`Profissão ou segmento: ${segment}`);
+  if (area) message.push(`Frente de interesse: ${area}`);
+  if (notes) message.push(`O que está pesando na rotina: ${notes}`);
+  message.push('', 'Podemos entender juntos o escopo ideal?');
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message.join('\n'))}`, '_blank', 'noopener,noreferrer');
   closeModal();
 });
 
-const header = document.querySelector('.site-header');
-let scrollTicking = false;
+let ticking = false;
 window.addEventListener('scroll', () => {
-  if (scrollTicking) return;
-  scrollTicking = true;
-  window.requestAnimationFrame(() => {
-    header?.classList.toggle('is-scrolled', window.scrollY > 18);
-    scrollTicking = false;
-  });
+  if (ticking) return;
+  ticking = true;
+  requestAnimationFrame(() => { header?.classList.toggle('scrolled', scrollY > 28); ticking = false; });
 }, { passive: true });
-
-if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-visible');
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.section-heading, .service-item, .process-grid li, .capacity-card, .faq-list details').forEach((element) => observer.observe(element));
-}
