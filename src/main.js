@@ -1,16 +1,78 @@
 import { initEditorialMotion } from './editorial-motion.js';
 
 const WHATSAPP_NUMBER = '5547988639872';
-const pageRegions = document.querySelectorAll('body > header, body > main, body > footer');
+const pageRegions = document.querySelectorAll('body > header, body > main, body > footer, body > .whatsapp-float');
 const menuToggle = document.querySelector('#menu-toggle');
 const navigation = document.querySelector('#mobile-nav');
 const modal = document.querySelector('#quote-modal');
 const modalClose = document.querySelector('#modal-close');
 const form = document.querySelector('#quote-form');
 const areaField = document.querySelector('#form-area');
+const whatsappFloat = document.querySelector('.whatsapp-float');
 let lastFocusedElement;
 
 document.documentElement.classList.add('js');
+
+function initLuxuryCursor() {
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) return;
+
+  const dot = document.createElement('div');
+  const ring = document.createElement('div');
+  dot.className = 'cursor-dot';
+  ring.className = 'cursor-ring';
+  dot.setAttribute('aria-hidden', 'true');
+  ring.setAttribute('aria-hidden', 'true');
+  document.body.append(dot, ring);
+
+  let targetX = -100;
+  let targetY = -100;
+  let ringX = -100;
+  let ringY = -100;
+  let cursorFrame = 0;
+
+  function renderCursor() {
+    cursorFrame = 0;
+    ringX += (targetX - ringX) * .18;
+    ringY += (targetY - ringY) * .18;
+    ring.style.left = `${ringX}px`;
+    ring.style.top = `${ringY}px`;
+
+    if (Math.abs(targetX - ringX) > .1 || Math.abs(targetY - ringY) > .1) {
+      cursorFrame = requestAnimationFrame(renderCursor);
+    }
+  }
+
+  window.addEventListener('pointermove', (event) => {
+    targetX = event.clientX;
+    targetY = event.clientY;
+    dot.style.left = `${targetX}px`;
+    dot.style.top = `${targetY}px`;
+    document.body.classList.add('cursor-visible');
+    if (!cursorFrame) cursorFrame = requestAnimationFrame(renderCursor);
+  }, { passive: true });
+
+  document.addEventListener('pointerover', (event) => {
+    const interactive = event.target instanceof Element
+      ? event.target.closest('a, button, input, textarea, select, summary')
+      : null;
+    document.body.classList.toggle('cursor-hover', Boolean(interactive));
+  }, { passive: true });
+
+  document.documentElement.addEventListener('mouseleave', () => document.body.classList.remove('cursor-visible'));
+  window.addEventListener('blur', () => document.body.classList.remove('cursor-visible'));
+}
+
+initLuxuryCursor();
+
+function updateFloatingContact() {
+  if (!whatsappFloat) return;
+  const revealPoint = Math.min(640, window.innerHeight * .75);
+  document.body.classList.toggle('show-whatsapp', window.scrollY > revealPoint);
+}
+
+window.addEventListener('scroll', updateFloatingContact, { passive: true });
+window.addEventListener('resize', updateFloatingContact, { passive: true });
+updateFloatingContact();
 
 let motionStarted = false;
 function startEditorialMotion() {
